@@ -33,10 +33,13 @@ class TestAddGroup(unittest.TestCase):
         wd.find_element_by_name("group_footer").click()
         wd.find_element_by_name("group_footer").clear()
         wd.find_element_by_name("group_footer").send_keys("random")
+        # submit group creation
         wd.find_element_by_name("submit").click()
+        # return to groups page
         wd.find_element_by_link_text("group page").click()
+        # logout
         wd.find_element_by_link_text("Logout").click()
-    
+
     def tearDown(self):
         self.wd.quit()
 
