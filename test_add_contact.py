@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from selenium import webdriver
 import unittest
+from contact import Contact
 
 class TestAddContact(unittest.TestCase):
     def setUp(self):
@@ -11,7 +12,7 @@ class TestAddContact(unittest.TestCase):
         wd = self.wd
         self.open_home_page(wd)
         self.login(wd, username="admin", password="secret")
-        self.create_contact(wd, name="Ivan", sname="Ivanov", address="Moscow")
+        self.create_contact(wd, Contact(name="Ivan", sname="Ivanov", address="Moscow"))
         self.return_to_contacts(wd)
         self.logout(wd)
 
@@ -19,7 +20,7 @@ class TestAddContact(unittest.TestCase):
         wd = self.wd
         self.open_home_page(wd)
         self.login(wd, username="admin", password="secret")
-        self.create_contact(wd, name="", sname="", address="")
+        self.create_contact(wd, Contact(name="", sname="", address=""))
         self.return_to_contacts(wd)
         self.logout(wd)
 
@@ -29,19 +30,19 @@ class TestAddContact(unittest.TestCase):
     def return_to_contacts(self, wd):
         wd.find_element_by_link_text("add next").click()
 
-    def create_contact(self, wd, name, sname, address):
+    def create_contact(self, wd, contact):
         # init contact creation
         wd.find_element_by_link_text("add new").click()
         # fill contact form
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
-        wd.find_element_by_name("firstname").send_keys(name)
+        wd.find_element_by_name("firstname").send_keys(contact.name)
         wd.find_element_by_name("lastname").click()
         wd.find_element_by_name("lastname").clear()
-        wd.find_element_by_name("lastname").send_keys(sname)
+        wd.find_element_by_name("lastname").send_keys(contact.sname)
         wd.find_element_by_name("address").click()
         wd.find_element_by_name("address").clear()
-        wd.find_element_by_name("address").send_keys(address)
+        wd.find_element_by_name("address").send_keys(contact.address)
         # submit contact creation
         wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
 
