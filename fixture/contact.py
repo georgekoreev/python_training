@@ -13,7 +13,7 @@ class ContactHelper:
         # select first contact
         wd.find_element_by_name("selected[]").click()
         # edit
-        wd.find_element_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='import'])[1]/following::img[2]").click()
+        wd.find_element_by_css_selector('img[alt="Edit"]').click()
         # submit deletion
         wd.find_element_by_xpath("(//input[@value='Delete'])").click()
 
