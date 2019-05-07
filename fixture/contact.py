@@ -8,6 +8,16 @@ class ContactHelper:
         wd = self.app.wd
         wd.find_element_by_link_text("add next").click()
 
+    def delete_first_contact(self):
+        wd = self.app.wd
+        # select first contact
+        wd.find_element_by_name("selected[]").click()
+        # edit
+        wd.find_element_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='import'])[1]/following::img[2]").click()
+        # submit deletion
+        wd.find_element_by_xpath("(//input[@value='Delete'])").click()
+
+
     def create_contact(self, contact):
         wd = self.app.wd
         # init contact creation
