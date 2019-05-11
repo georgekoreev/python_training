@@ -19,7 +19,6 @@ class ContactHelper:
         self.fill_contact_form(new_contact_data)
         # submit modification
         wd.find_element_by_css_selector('input[name="update"]').click()
-        self.return_to_contacts()
 
     def edit_first_contact(self):
         wd = self.app.wd
