@@ -6,7 +6,8 @@ class ContactHelper:
 
     def return_to_contacts(self):
         wd = self.app.wd
-        wd.find_element_by_link_text("add next").click()
+        if not (wd.current_url.endswith("/edit.php") and len(wd.find_elements_by_name("submit")) > 0):
+            wd.find_element_by_link_text("add next").click()
 
     def modify_first_contact(self, new_contact_data):
         wd = self.app.wd
