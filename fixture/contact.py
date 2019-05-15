@@ -6,11 +6,11 @@ class ContactHelper:
 
     def return_to_contacts(self):
         wd = self.app.wd
-        if not (wd.current_url.endswith("/edit.php") and len(wd.find_elements_by_name("submit")) > 0):
-            wd.find_element_by_link_text("add next").click()
+        wd.find_element_by_link_text("add next").click()
 
     def modify_first_contact(self, new_contact_data):
         wd = self.app.wd
+        self.open_contacts_page()
         self.select_first_contact()
         # open modification form
         wd.find_element_by_css_selector('img[alt="Details"]').click()
@@ -23,6 +23,7 @@ class ContactHelper:
 
     def edit_first_contact(self):
         wd = self.app.wd
+        self.open_contacts_page()
         self.select_first_contact()
         # select details
         wd.find_element_by_css_selector('img[alt="Details"]').click()
@@ -37,6 +38,7 @@ class ContactHelper:
 
     def delete_first_contact(self):
         wd = self.app.wd
+        self.open_contacts_page()
         # select first contact
         wd.find_element_by_name("selected[]").click()
         # edit
@@ -46,6 +48,7 @@ class ContactHelper:
 
     def create_contact(self, contact):
         wd = self.app.wd
+        self.open_contacts_page()
         # init contact creation
         wd.find_element_by_link_text("add new").click()
         self.fill_contact_form(contact)
@@ -69,3 +72,9 @@ class ContactHelper:
     def count(self):
         wd = self.app.wd
         return len(wd.find_elements_by_name("selected[]"))
+
+    def open_contacts_page(self):
+        wd = self.app.wd
+        if not (wd.current_url.endswith("/addressbook/") and len(wd.find_elements_by_name("add")) > 0):
+            wd.find_element_by_link_text("home").click()
+
