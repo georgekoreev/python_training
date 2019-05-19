@@ -1,3 +1,5 @@
+from model.contact import Contact
+
 
 class ContactHelper:
 
@@ -77,4 +79,15 @@ class ContactHelper:
         wd = self.app.wd
         if not (wd.current_url.endswith("/addressbook/") and len(wd.find_elements_by_name("add")) > 0):
             wd.find_element_by_link_text("home").click()
+
+    def get_contact_list(self):
+        wd = self.app.wd
+        self.open_contacts_page()
+        contacts = []
+        for element in wd.find_elements_by_css_selector("td.center"):
+            text = element.text
+            id = element.find_element_by_name("selected[]").get_attribute("value")
+            contacts.append(Contact(name=text, id=id))
+        return contacts
+
 
