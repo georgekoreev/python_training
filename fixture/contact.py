@@ -85,10 +85,10 @@ class ContactHelper:
         self.open_contacts_page()
         contacts = []
         for element in wd.find_elements_by_name("entry"):
-            text = element.text
-            id = element.find_elements_by_tag_name("td").get_attribute("value")
-            # взять информация из ячейки?
-            contacts.append(Contact(name=text, sname=text, id=id))
+            cells = element.find_elements_by_tag_name("td")
+            text = cells[2].text
+            text2 = cells[1].text
+            id = cells[0].find_element_by_tag_name("input").get_attribute("value")
+            contacts.append(Contact(name=text, sname=text2, id=id))
         return contacts
-
 
