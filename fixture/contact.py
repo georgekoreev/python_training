@@ -91,5 +91,5 @@ class ContactHelper:
             id = cells[0].find_element_by_tag_name("input").get_attribute("value")
             contacts.append(Contact(name=text, sname=text2, id=id))
         return contacts
-    
+
 
