@@ -56,7 +56,7 @@ class ContactHelper:
         # select first contact
         #wd.find_element_by_name("selected[]")[index].click()
         # edit
-        wd.find_element_by_css_selector('img[alt="Edit"]').click()
+        wd.find_elements_by_css_selector('img[alt="Edit"]')[index].click()
         # submit deletion
         wd.find_element_by_xpath("(//input[@value='Delete'])").click()
         self.contact_cache = None
