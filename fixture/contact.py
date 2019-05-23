@@ -18,7 +18,7 @@ class ContactHelper:
         self.open_contacts_page()
         self.select_contact_by_index(index)
         # open modification form
-        wd.find_element_by_css_selector('img[alt="Details"]').click()
+        wd.find_elements_by_xpath("(//img[@alt='Details'])")[index].click()
         # select modify
         wd.find_element_by_css_selector('input[name="modifiy"]').click()
         # fill contact form
@@ -54,7 +54,7 @@ class ContactHelper:
         self.open_contacts_page()
         self.select_contact_by_index(index)
         # select first contact
-        wd.find_element_by_name("selected[]").click()
+        #wd.find_element_by_name("selected[]")[index].click()
         # edit
         wd.find_element_by_css_selector('img[alt="Edit"]').click()
         # submit deletion
