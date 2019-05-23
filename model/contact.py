@@ -20,3 +20,4 @@ class Contact:
             return int(self.id)
         else:
             return maxsize
+
