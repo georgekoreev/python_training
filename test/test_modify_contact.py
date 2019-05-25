@@ -24,3 +24,4 @@ def test_modify_contact_name(app):
 #    new_contacts = app.contact.get_contact_list()
 #    assert len(old_contacts) == len(new_contacts)
 
+

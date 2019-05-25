@@ -13,3 +13,4 @@ def test_delete_some_contact(app):
     old_contacts[index:index+1] = []
     assert old_contacts == new_contacts
 
+

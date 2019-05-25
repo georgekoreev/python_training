@@ -27,6 +27,30 @@ class ContactHelper:
         wd.find_element_by_css_selector('input[name="update"]').click()
         self.contact_cache = None
 
+    def open_contact_view_by_index(self, index, new_contact_data):
+        wd = self.app.wd
+        self.open_contacts_page()
+        self.select_contact_by_index(index)
+        wd.find_elements_by_xpath("(//img[@alt='Details'])")[index].click()
+        wd.find_element_by_css_selector('input[name="modifiy"]').click()
+        self.fill_contact_form(new_contact_data)
+        wd.find_element_by_css_selector('input[name="update"]').click()
+        self.contact_cache = None
+
+    def get_contact_info_from_edit_page(self, index):
+        wd = self.app.wd
+        self.modify_contact_by_index(index)
+        firstname = wd.find_element_by_name("name").get_attribute("value")
+        lastname = wd.find_element_by_name("sname").get_attribute("value")
+        id = wd.find_element_by_name("id").get_attribute("value")
+        homephone = wd.find_element_by_name("home").get_attribute("value")
+        workphone = wd.find_element_by_name("work").get_attribute("value")
+        mobilephone = wd.find_element_by_name("mobile").get_attribute("value")
+        secondaryphone = wd.find_element_by_name("phone2").get_attribute("value")
+        return Contact(name=firstname, sname=lastname, id=id,
+                       homephone=homephone, mobilephone=mobilephone,
+                       workphone=workphone, secondaryphone=secondaryphone)
+
     def edit_first_contact(self):
         wd = self.app.wd
         self.open_contacts_page()
@@ -106,8 +130,12 @@ class ContactHelper:
                 text = cells[2].text
                 text2 = cells[1].text
                 id = cells[0].find_element_by_tag_name("input").get_attribute("value")
-                self.contact_cache.append(Contact(name=text, sname=text2, id=id))
+                all_phones = cells[5].text.splitlines()
+                self.contact_cache.append(Contact(name=text, sname=text2, id=id,
+                                                  homephone=all_phones[0], mobilephone=all_phones[1],
+                                                  workphone=all_phones[2], secondaryphone=all_phones[3]))
         return list(self.contact_cache)
+
 
 
 
