@@ -14,3 +14,4 @@ def test_delete_some_contact(app):
     assert old_contacts == new_contacts
 
 
+

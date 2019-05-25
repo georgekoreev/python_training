@@ -26,3 +26,4 @@ class Contact:
             return maxsize
 
 
+

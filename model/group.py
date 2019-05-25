@@ -19,3 +19,4 @@ class Group:
             return int(self.id)
         else:
             return maxsize
+
