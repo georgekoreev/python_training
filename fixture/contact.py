@@ -66,11 +66,16 @@ class ContactHelper:
         firstname = wd.find_element_by_name("firstname").get_attribute("value")
         lastname = wd.find_element_by_name("lastname").get_attribute("value")
         id = wd.find_element_by_name("id").get_attribute("value")
+        address = wd.find_element_by_name("address").get_attribute("value")
+        email = wd.find_element_by_name("email").get_attribute("value")
+        email2 = wd.find_element_by_name("email2").get_attribute("value")
+        email3 = wd.find_element_by_name("email3").get_attribute("value")
         homephone = wd.find_element_by_name("home").get_attribute("value")
         workphone = wd.find_element_by_name("work").get_attribute("value")
         mobilephone = wd.find_element_by_name("mobile").get_attribute("value")
         secondaryphone = wd.find_element_by_name("phone2").get_attribute("value")
         return Contact(firstname=firstname, lastname=lastname, id=id,
+                       address=address, email=email, email2=email2, email3=email3,
                        homephone=homephone, mobilephone=mobilephone,
                        workphone=workphone, secondaryphone=secondaryphone)
 
@@ -135,6 +140,14 @@ class ContactHelper:
         self.change_field_value("firstname", contact.firstname)
         self.change_field_value("lastname", contact.lastname)
         self.change_field_value("address", contact.address)
+        self.change_field_value("company", contact.company)
+        self.change_field_value("address", contact.address)
+        self.change_field_value("homephone", contact.homephone)
+        self.change_field_value("workphone", contact.workphone)
+        self.change_field_value("mobilephone", contact.mobilephone)
+        self.change_field_value("secondaryphone", contact.secondaryphone)
+        self.change_field_value("email", contact.email)
+        self.change_field_value("address2", contact.address2)
 
     def change_field_value(self, field_name, text):
         wd = self.app.wd
@@ -163,9 +176,12 @@ class ContactHelper:
                 cells = row.find_elements_by_tag_name("td")
                 firstname = cells[1].text
                 lastname = cells[2].text
-                id = cells[0].find_element_by_tag_name("input").get_attribute("value")
+                address = cells[3].text
+                all_emails = cells[4].text
                 all_phones = cells[5].text
+                id = cells[0].find_element_by_tag_name("input").get_attribute("value")
                 self.contact_cache.append(Contact(firstname=firstname, lastname=lastname, id=id,
+                                                  address=address, all_emails_from_home_page=all_emails,
                                                   all_phones_from_home_page=all_phones))
         return list(self.contact_cache)
 
