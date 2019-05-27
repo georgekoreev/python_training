@@ -6,8 +6,8 @@ from model.contact import Contact
 def test_add_contact(app):
     old_contacts = app.contact.get_contact_list()
     contact = Contact(firstname="Ivan", lastname="Ivanov", address="Moscow",
-                      company="Google", homephone="123454", workphone="5464722",
-                      mobilephone="4672392", secondaryphone="676273",
+                      company="Google", home="123454", work="5464722",
+                      mobile="4672392", phone2="676273",
                       email="kotiki@mail.ru", address2="Magadan")
     app.contact.create_contact(contact)
     new_contacts = app.contact.get_contact_list()
